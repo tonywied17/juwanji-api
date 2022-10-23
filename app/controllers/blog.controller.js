@@ -16,6 +16,8 @@ exports.create = (req, res) => {
   // Create a Blog
   const blog = {
     title: req.body.title,
+    image: req.body.image,
+    description: req.body.description,
     post: req.body.post,
     tag: req.body.tag,
     author: req.body.author,
