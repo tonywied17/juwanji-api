@@ -1,6 +1,6 @@
 const uploadFile = require("../middleware/upload");
 const fs = require("fs");
-const baseUrl = "https://api.molex.cloud/files/";
+const baseUrl = "https://api.tonewebdesign.com/juwanji/files/";
 const path = require("path");
 const __basedir = path.resolve();
 
