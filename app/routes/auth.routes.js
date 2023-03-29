@@ -11,7 +11,7 @@ module.exports = function(app) {
   });
 
   app.post(
-    "/api/auth/signup",
+    "/juwanji/auth/signup",
     [
       verifySignUp.checkDuplicateUsernameOrEmail,
       verifySignUp.checkRolesExisted
@@ -19,5 +19,5 @@ module.exports = function(app) {
     controller.signup
   );
 
-  app.post("/api/auth/signin", controller.signin);
+  app.post("/juwanji/auth/signin", controller.signin);
 };
