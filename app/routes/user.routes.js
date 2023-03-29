@@ -1,6 +1,7 @@
 const { authJwt } = require("../middleware");
 const controller = require("../controllers/user.controller");
 const file = require("../controllers/file.controller");
+var router = require("express").Router();
 const blog = require("../controllers/blog.controller.js");
 
 module.exports = function (app) {
@@ -12,43 +13,43 @@ module.exports = function (app) {
     next();
   });
 
-  app.get("/api/test/all", controller.allAccess);
+  app.get("/juwanji/test/all", controller.allAccess);
 
   app.get(
-    "/api/test/user",
+    "/juwanji/test/user",
     [authJwt.verifyToken],
     controller.userBoard
   );
 
   app.get(
-    "/api/test/mod",
+    "/juwanji/test/mod",
     [authJwt.verifyToken, authJwt.isModerator],
     controller.moderatorBoard
   );
 
   app.get(
-    "/api/test/admin",
+    "/juwanji/test/admin",
     [authJwt.verifyToken, authJwt.isAdmin],
     controller.adminBoard
   );
 
   //uploading
   app.post(
-    "/upload",
+    "/juwanji/upload",
     file.upload
   );
 
   app.get(
-    "/files",
+    "/juwanji/files",
     file.getListFiles
   );
   app.get(
-    "/files/:name",
+    "/juwanji/files/:name",
     file.download
   );
 
   app.delete(
-    "/files/:name",
+    "/juwanji/files/:name",
     file.remove
   );
 
@@ -57,57 +58,54 @@ module.exports = function (app) {
 
   // Create a new blog
   app.post(
-    "/blog",
+    "/juwanji/blog",
     [authJwt.verifyToken, authJwt.isAdmin],
     blog.create
   );
 
   // Retrieve all blogs
   app.get(
-    "/blog",
+    "/juwanji/blog",
     blog.findAll
   );
 
   // Retrieve all published blogs
   app.get(
-    "/blog/published",
+    "/juwanji/blog/published",
     blog.findAllPublished
   );
 
     // Retrieve all published blogs
     app.get(
-      "/blog/tags/:tag",
+      "/juwanji/blog/tags/:tag",
       blog.findAllByTag
     );
 
   // Retrieve a single blog with id
   app.get(
-    "/blog/:id",
+    "/juwanji/blog/:id",
     blog.findOne
   );
 
   // Update a blog with id
   app.put(
-    "/blog/:id",
+    "/juwanji/blog/:id",
     [authJwt.verifyToken, authJwt.isAdmin],
     blog.update
   );
 
   // Delete a blog with id
   app.delete(
-    "/blog/:id",
+    "/juwanji/blog/:id",
     [authJwt.verifyToken, authJwt.isAdmin],
     blog.delete
   );
 
   // Delete all blogs
   app.delete(
-    "/blog",
+    "/juwanji/blog",
     [authJwt.verifyToken, authJwt.isAdmin],
     blog.deleteAll
   )
-
-
-
 
 };
