@@ -5,7 +5,7 @@ const app = express();
 const cors = require("cors");
 
 app.use(cors({
-  origin: '*',
+  origin: ['https://juwanji.tbz.wtf', 'http://localhost:4200'],
   methods: ['GET','POST','DELETE','UPDATE','PUT','PATCH']
 }));
 
@@ -15,10 +15,8 @@ app.use(express.json());
 // parse requests of content-type - application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: true }));
 
-//test
-app.use(express.static('resources'));
+app.set('json spaces', 2)
 
-// database
 const db = require("./app/models");
 const Role = db.role;
 
@@ -31,7 +29,7 @@ db.sequelize.sync();
 // });
 
 // simple route
-app.get("/juwanji", cors(), (req, res) => {
+app.get("/juwanji", (req, res) => {
   res.json({ message: "Juwanji API." });
 });
 
